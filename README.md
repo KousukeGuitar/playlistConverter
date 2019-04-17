@@ -2,7 +2,7 @@ playlistConverter
 ====
 
 ## Description
-Convert playlists with m3u extension created by Itunes (Mac) to playlists for WALKMAN.
+Convert playlists with m3u extension created by Itunes to playlists for WALKMAN.
 
 ## Install
 
