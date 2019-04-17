@@ -1,4 +1,6 @@
 <?php
+require_once('./lib/macFileNameNormalizer.php');
+
 /*
  |------------------------------------------------------------------------------
  | config
@@ -18,7 +20,7 @@ define("INTERVAL" , 60 * 10); // 10min (60sec * 10min)
 /**
  * INTERVAL以内に更新されたm3u拡張子のファイルを、対象ディレクトリにコピーする
  * 該当ファイルが無ければfalseを返す
- * 
+ *
  * @return array|bool
  */
 function copy_playlist()
@@ -44,7 +46,7 @@ function copy_playlist()
 /**
  * 対象ファイルをWALKMAN用のプレイリストに変換する
  * 対象ファイル：Macで作られたm3u拡張子のファイル
- * 
+ *
  * @param string 変換するファイルのパス
  */
 function convert_playlist($file)
@@ -54,7 +56,7 @@ function convert_playlist($file)
     $pattern = '#' . ITUNES_PATH . '#';
 
     foreach ($rows as $key => $row) {
-        $insert_data = iconv("UTF-8-MAC", "UTF-8", $row);
+        $insert_data = macFileNameNormalizer::normalizeUtf8MacFileName($row);
         $insert_data = preg_replace($pattern,WALKMAN_MUSIC_PATH,$insert_data);
         fwrite($fp,$insert_data);
     }
